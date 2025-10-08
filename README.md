@@ -19,7 +19,7 @@ A modern ride-sharing mobile application built with React Native and Expo.
 - **Authentication**: Clerk
 - **Database**: Neon (PostgreSQL)
 - **Maps**: React Native Maps
-- **Payment**: Stripe
+- **Payment**: Razorpay
 - **State Management**: Zustand
 
 ## Getting Started
