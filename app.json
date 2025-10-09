@@ -40,6 +40,14 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": "https://yourapp.dev/"
+      },
+      "eas": {
+        "projectId": "0d7def7d-daae-429f-a8bf-e4da4f8cc4b2"
+      }
     }
   }
 }
