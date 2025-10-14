@@ -1,6 +1,6 @@
 import { Driver, MarkerData } from "@/types/type";
 
-const directionsAPI = process.env.EXPO_PUBLIC_DIRECTIONS_API_KEY;
+const olaMapsApiKey = process.env.EXPO_PUBLIC_OLAMAPS_API_KEY;
 
 export const generateMarkersFromData = ({
 	data,
@@ -96,17 +96,29 @@ export const calculateDriverTimes = async ({
 	try {
 		const timesPromises = markers.map(async (marker) => {
 			const responseToUser = await fetch(
-				`https://maps.googleapis.com/maps/api/directions/json?origin=${marker.latitude},${marker.longitude}&destination=${userLatitude},${userLongitude}&key=${directionsAPI}`
+				`https://api.olamaps.io/routing/v1/directions?origin=${marker.latitude},${marker.longitude}&destination=${userLatitude},${userLongitude}&api_key=${olaMapsApiKey}`,
+				{
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+				}
 			);
 			const dataToUser = await responseToUser.json();
-			const timeToUser = dataToUser.routes[0].legs[0].duration.value; // Time in seconds
+			const timeToUser = dataToUser.routes?.[0]?.legs?.[0]?.duration || 0; // Time in seconds
 
 			const responseToDestination = await fetch(
-				`https://maps.googleapis.com/maps/api/directions/json?origin=${userLatitude},${userLongitude}&destination=${destinationLatitude},${destinationLongitude}&key=${directionsAPI}`
+				`https://api.olamaps.io/routing/v1/directions?origin=${userLatitude},${userLongitude}&destination=${destinationLatitude},${destinationLongitude}&api_key=${olaMapsApiKey}`,
+				{
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+					},
+				}
 			);
 			const dataToDestination = await responseToDestination.json();
 			const timeToDestination =
-				dataToDestination.routes[0].legs[0].duration.value; // Time in seconds
+				dataToDestination.routes?.[0]?.legs?.[0]?.duration || 0; // Time in seconds
 
 			const totalTime = (timeToUser + timeToDestination) / 60; // Total time in minutes
 			const price = (totalTime * 0.5).toFixed(2); // Calculate price based on time
