@@ -1,5 +1,5 @@
 {
-	"name": "ride-sharing-app",
+	"name": "ryde",
 	"main": "expo-router/entry",
 	"version": "1.0.0",
 	"scripts": {
@@ -9,7 +9,9 @@
 		"ios": "expo run:ios",
 		"web": "expo start --web",
 		"test": "jest --watchAll",
-		"lint": "expo lint"
+		"lint": "expo lint",
+		"dev-build": "eas build -p android --profile development",
+		"preview": "eas build -p android --profile preview"
 	},
 	"jest": {
 		"preset": "jest-expo"
@@ -31,7 +33,6 @@
 		"@neondatabase/serverless": "^0.9.4",
 		"@react-native-clipboard/clipboard": "^1.14.1",
 		"@react-navigation/native": "^7.1.6",
-		"@twotalltotems/react-native-otp-input": "^1.3.11",
 		"expo": "^54.0.12",
 		"expo-auth-session": "~7.0.8",
 		"expo-constants": "~18.0.9",
@@ -54,6 +55,7 @@
 		"react-native-keyboard-aware-scroll-view": "^0.9.5",
 		"react-native-maps": "1.20.1",
 		"react-native-modal": "^13.0.1",
+		"react-native-otp-entry": "^1.8.5",
 		"react-native-razorpay": "^2.3.0",
 		"react-native-reanimated": "~4.1.1",
 		"react-native-safe-area-context": "~5.6.0",
